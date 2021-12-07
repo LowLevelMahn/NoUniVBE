@@ -15,7 +15,7 @@ UniVBE dectection:
 3. check if interrupt 10h.vector.segment:0 is the UniVBE signature
 4. check if interrupt 2Fh.vector.segment is equal to interrupt 10h.vector.segment
 
-NoUniVBE mimics this behavior to fake a real installed UniVBE but keep all interrupt calls handled by the real Hardware or dosbox
+NoUniVBE mimics this behavior enough to fake a real installed UniVBE but keep all interrupt calls handled by the real Hardware or dosbox
 
 # Status:
 Mimics UniVBE 5.3a TSR "interfaces" - UniVBE think its already installed, in-game linked UniVBE (compatible to 5.3a) is inhibited
