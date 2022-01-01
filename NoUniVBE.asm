@@ -342,6 +342,7 @@ install:
   push es
   mov ax,psp_seg
   mov es,ax
+  mov es,es:[2ch]
   mov ah,49h
   int 21h
   pop es
