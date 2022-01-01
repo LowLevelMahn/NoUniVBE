@@ -25,14 +25,15 @@ rem %link_exe% /MAP NoUniVBE.obj,NoUniVBE.com,NoUniVBE.map,,,
 
 pause
 
-rem set WATCOM=%tools_dir%\open-watcom-2_0-c-win-x64
-rem set WATCOM_BIN=%watcom%\binnt64
-rem set INCLUDE=%watcom%\h
-rem set PATH=%WATCOM_BIN%;%PATH%
-rem set wcc_exe=%watcom_bin%\wcc.exe
+set WATCOM=%tools_dir%\open-watcom-2_0-c-win-x64
+set WATCOM_BIN=%watcom%\binnt64
+set INCLUDE=%watcom%\h
+set PATH=%WATCOM_BIN%;%PATH%
+set wcc_exe=%watcom_bin%\wcc.exe
+set wcl_exe=%watcom_bin%\wcl.exe
 
-rem %wcc_exe% uvbcheck.c -o %build_dir%\uvbcheck.exe
+%wcl_exe% -bt=dos -mm %src_dir%\UVBCHECK.C
 
-rem pause
+pause
 
 popd

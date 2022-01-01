@@ -6,7 +6,10 @@
 #include <string.h>
 #include <dos.h>
 
-#define STATIC_ASSERT(COND) struct{char static_assertion[(COND)?1:-1];};
+#define TOKENPASTE(x, y) x ## y
+#define TOKENPASTE2(x, y) TOKENPASTE(x, y)
+
+#define STATIC_ASSERT(COND) struct TOKENPASTE2(ASSERT_STRUCT_, __LINE__){char static_assertion[(COND)?1:-1];};
 #define OFFSETOF(type, field)((unsigned long) (&(((type*)0)->field)))
 
 typedef unsigned char uint8_t;
@@ -216,7 +219,7 @@ int main()
   
   printf("  Signature: %.4s\n", VIB.VbeSignature);
   printf("  VbeVersion: 0x%04X\n", VIB.VbeVersion);
-  printf("  OemStringPtr: %s\n", oem_str);
+  printf("  OemStringPtr: %Fs\n", oem_str);
   printf("  Capabilities: 0x%08X\n", VIB.Capabilities);
   printf("  VideoModePtr: 0x%08X\n", VIB.VideoModePtr);
   printf("  TotalMemory: %4d KB\n", VIB.TotalMemory*64);
@@ -226,7 +229,7 @@ int main()
   printf("  OemProductNamePtr: %s\n", to_str(&VIB.OemProductNamePtr));
   printf("  OemProductRevPtr: %s\n", to_str(&VIB.OemProductRevPtr));
 
-  if( strncmp(oem_str, starts_with, strlen(starts_with)) == 0 )
+  if( _fstrncmp(oem_str, starts_with, strlen(starts_with)) == 0 )
   {
     printf("Found UniVBE #1\n");
   
@@ -258,27 +261,27 @@ int main()
           // details
           univbe_data = MK_FP(drv_seg, drv_ofs);
 
-          printf("Video Card: %s\n", univbe_data->card_info);
-          printf("RAM DAC: %s\n", univbe_data->dac_info);
-          printf("Clock Chip: %s\n", univbe_data->clock_info);
+          printf("Video Card: %Fs\n", univbe_data->card_info);
+          printf("RAM DAC: %Fs\n", univbe_data->dac_info);
+          printf("Clock Chip: %Fs\n", univbe_data->clock_info);
 
           //printf("ciphered_registered_user\n");
           //DumpHex(univbe_data->ciphered_registered_user, sizeof(univbe_data->ciphered_registered_user));
           
-          strcpy(buffer, univbe_data->ciphered_registered_user);
+          _fstrcpy(buffer, univbe_data->ciphered_registered_user);
           deciper_text(buffer);
           printf("deciphered registered user: %s\n", buffer);
           
           //printf("ciphered_serial_no\n");
           //DumpHex(univbe_data->ciphered_serial_no, sizeof(univbe_data->ciphered_serial_no));
 
-          strcpy(buffer, univbe_data->ciphered_serial_no);
+          _fstrcpy(buffer, univbe_data->ciphered_serial_no);
           deciper_text(buffer);
           printf("deciphered serial no: %s\n", buffer);
 
           
-          printf("version_major_minor: %.2s\n", univbe_data->version_major_minor);
-          printf("release_date: %s\n", univbe_data->release_date);
+          printf("version_major_minor: %.2Fs\n", univbe_data->version_major_minor);
+          printf("release_date: %Fs\n", univbe_data->release_date);
           printf("version/license type: 0x%04X\n", univbe_data->version);
           printf("unknown2: 0x%04X ???\n", univbe_data->unknown2);
           
