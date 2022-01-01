@@ -1,6 +1,6 @@
 # NoUniVBE
 
-DOS TSR to prevent UniVBE 5.3x loading by faking the original UniVBE behavior. There is absolutely no need for a game running inside dosbox to use the legacy VESA code of UniVBE
+DOS TSR to prevent UniVBE 5.3x loading by faking the original UniVBE behavior. There is absolutely no need for a game running inside dosbox or with a good enough VESA BIOS to use the legacy VESA code of UniVBE
 
 How it works:
 
