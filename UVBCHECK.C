@@ -1,6 +1,3 @@
-// BEWARE: needs to be build with a FAR-Data-Pointer memory model (compact or large) to work correct
-// or else the far pointers get crippled - mostly wrong OEM-Strings etc. will be the result (Thanks to FalcoSoft/Vogons-Forum)
-
 #include <stdio.h>
 #include <string.h>
 #include <dos.h>
